@@ -1,0 +1,23 @@
+version: '3.1'
+services:
+  app:
+    build: ./
+    container_name: task-server
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_USER=task
+      - POSTGRES_PASSWORD=task
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://task-db:5432/task
+
+  db:
+    container_name: task-db
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=task
+      - POSTGRES_USER=task
+      - POSTGRES_PASSWORD=task
