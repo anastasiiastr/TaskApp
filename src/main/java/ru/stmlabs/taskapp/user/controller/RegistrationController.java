@@ -1,7 +1,6 @@
 package ru.stmlabs.taskapp.user.controller;
 
 import org.springframework.beans.factory.annotation.Qualifier;
-import ru.stmlabs.taskapp.user.dto.UserDto;
 import ru.stmlabs.taskapp.user.dto.UserResponseDto;
 import ru.stmlabs.taskapp.user.util.UserRolesEnum;
 import ru.stmlabs.taskapp.user.mapper.UserMapper;
