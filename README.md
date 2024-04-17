@@ -1,2 +1,967 @@
 # __Тема__ 
 Цифровой сервис информационной поддержки коллобораций в сфере научной деятельности университета
+
+## Swagger
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Цифровой сервис информационной поддержки коллабораций в сфере научной деятельности университета",
+    "description": "hh для университета и работодателей",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api/v1/"
+    }
+  ],
+  "paths": {
+    "/employers": {
+      "post": {
+        "summary": "Регистрация работодателя",
+        "tags": [
+          "employers"
+        ],
+        "operationId": "createEmployer",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployerRegistrationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешная регистрация работодателя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployerResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Получение списка зарегестрированных работодателей",
+        "tags": [
+          "employers"
+        ],
+        "operationId": "getEmployerListRegistration",
+        "responses": {
+          "200": {
+            "description": "Список зарегестрированных работодателей",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployerListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/employers/login": {
+      "post": {
+        "summary": "Вход в систему работодателей",
+        "tags": [
+          "employers"
+        ],
+        "operationId": "employerLogin",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployerLoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный вход в систему работодателей",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployerLoginResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/employers/{id}": {
+      "get": {
+        "summary": "Поиск работодателя по id",
+        "tags": [
+          "employers"
+        ],
+        "operationId": "employerById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Работодатель по id нашелся",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Удаление работодателя по id",
+        "tags": [
+          "employers"
+        ],
+        "operationId": "deleteEmployerById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное удаление",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployerResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/university_workers": {
+      "post": {
+        "summary": "Регистрация работника университета",
+        "tags": [
+          "university_workers"
+        ],
+        "operationId": "universityWorkerRegistration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UniversityWorkerRegistrationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешная регистрация работника университета",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniversityWorkerResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Получение списка зарегестрированных работников университета",
+        "tags": [
+          "university_workers"
+        ],
+        "operationId": "getUniversityWorkerListRegistration",
+        "responses": {
+          "200": {
+            "description": "Список зарегестрированных работников университета",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniversityWorkerListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/university_workers/login": {
+      "post": {
+        "summary": "Вход в систему работников университета",
+        "tags": [
+          "university_workers"
+        ],
+        "operationId": "universityWorkerLogin",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UniversityWorkerLoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный вход в систему работников университета",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniversityWorkerLoginResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/universityworkers/{id}": {
+      "get": {
+        "summary": "Поиск работника университета по id",
+        "tags": [
+          "university_workers"
+        ],
+        "operationId": "universityWorkerById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Работник университета нашелся",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniversityWorker"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Удаление работника университета по id",
+        "tags": [
+          "university_workers"
+        ],
+        "operationId": "deleteUniversityWorkerById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное удаление работника университета по id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniversityWorkerResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/university_workers/{id}/favorites/{taskId}": {
+      "post": {
+        "summary": "Добавление задачи в избранное",
+        "tags": [
+          "university_workers"
+        ],
+        "operationId": "createFavoriteTask",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FavoriteTask"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Задача успешно добавлена в избранное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FavoriteTask"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Удаление задачи из избранного",
+        "tags": [
+          "university_workers"
+        ],
+        "operationId": "deleteFavoriteTask",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Задача успешно удалена из избранного",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FavoriteTask"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{taskId}": {
+      "post": {
+        "summary": "Создание задачи для университетской программы",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "createTask",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskCreationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Задача успешно создана",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskCreationResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Удаление задачи из университетской программы",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "deleteTask",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Задача успешно удалена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskCreationResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "get": {
+        "summary": "Получение списка задач",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "getTaskList",
+        "responses": {
+          "200": {
+            "description": "Список задач успешно получен",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{taskId}/responses": {
+      "post": {
+        "summary": "Отклик на задачу",
+        "tags": [
+          "tasks"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskResponseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Отклик на задачу успешно отправлен",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Остальные коды",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Employer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 5
+          },
+          "surname": {
+            "type": "string",
+            "example": "Marusina"
+          },
+          "name": {
+            "type": "string",
+            "example": "Darya"
+          },
+          "patronymic": {
+            "type": "string",
+            "example": "Andreevna"
+          },
+          "city": {
+            "type": "string",
+            "example": "Moscow"
+          },
+          "organization": {
+            "type": "string",
+            "example": "Gazprom"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "mdar@gmail.com"
+          }
+        }
+      },
+      "UniversityWorker": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 6
+          },
+          "surname": {
+            "type": "string",
+            "example": "Troshechkin"
+          },
+          "name": {
+            "type": "string",
+            "example": "Vladislav"
+          },
+          "patronymic": {
+            "type": "string",
+            "example": "Igorevich"
+          },
+          "city": {
+            "type": "string",
+            "example": "Moscow"
+          },
+          "organization": {
+            "type": "string",
+            "example": "Nizhny Novgorod state technical university n.a. R.E. Alekseev"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "troshIg@gmail.com"
+          }
+        }
+      },
+      "EmployerRegistrationRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 5
+          },
+          "surname": {
+            "type": "string",
+            "example": "Marusina"
+          },
+          "name": {
+            "type": "string",
+            "example": "Darya"
+          },
+          "patronymic": {
+            "type": "string",
+            "example": "Andreevna"
+          },
+          "city": {
+            "type": "string",
+            "example": "Moscow"
+          },
+          "organization": {
+            "type": "string",
+            "example": "Gazprom"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "mdar@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "example": "123str"
+          }
+        }
+      },
+      "EmployerResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 13
+          }
+        }
+      },
+      "EmployerLoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          }
+        }
+      },
+      "EmployerLoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "7u13rhn8xm2OHmNk"
+          }
+        }
+      },
+      "UniversityWorkerRegistrationRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 6
+          },
+          "surname": {
+            "type": "string",
+            "example": "Troshechkin"
+          },
+          "name": {
+            "type": "string",
+            "example": "Vladislav"
+          },
+          "patronymic": {
+            "type": "string",
+            "example": "Igorevich"
+          },
+          "city": {
+            "type": "string",
+            "example": "Moscow"
+          },
+          "organization": {
+            "type": "string",
+            "example": "Nizhny Novgorod state technical university n.a. R.E. Alekseev"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "troshIg@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          }
+        }
+      },
+      "UniversityWorkerResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          }
+        }
+      },
+      "EmployerListResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Employer"
+        }
+      },
+      "UniversityWorkerListResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/UniversityWorker"
+        }
+      },
+      "UniversityWorkerLoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          }
+        }
+      },
+      "UniversityWorkerLoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "7u13rhn8xm2OHmNk"
+          }
+        }
+      },
+      "TaskCreationRequest": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "integer"
+          },
+          "university": {
+            "type": "string"
+          },
+          "task": {
+            "type": "string"
+          },
+          "task description": {
+            "type": "string"
+          }
+        }
+      },
+      "TaskCreationResponse": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "integer"
+          }
+        }
+      },
+      "TaskListResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/TaskCreationRequest"
+        }
+      },
+      "TaskResponseRequest": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "TaskResponse": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "integer"
+          }
+        }
+      },
+      "FavoriteTask": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "integer",
+            "example": 3
+          }
+        }
+      }
+    }
+  }
+}
