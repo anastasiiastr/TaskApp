@@ -8,8 +8,8 @@ import ru.stmlabs.taskapp.user.entity.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-12T10:12:10+0300",
-    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 17.0.1 (Oracle Corporation)"
+    date = "2024-05-01T16:26:47+0300",
+    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 17.0.7 (JetBrains s.r.o.)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
